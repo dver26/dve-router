@@ -1,6 +1,6 @@
 # Crea un React Router desde cero
 
-- [ ] Crea una forma de hacer SPAs
+- [x] Crea una forma de hacer SPAs (Single Page Applications)
 - [ ] Poder navegar entre páginas con el botón de atrás
 - [ ] Crear un componente Link para hacerlo más declarativo
 - [ ] Crear un componente Router para hacerlo más declarativo
