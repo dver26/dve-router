@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
+import { EVENTS } from './const .js'
+
+function navigate(href) {
+  window.history.pushState({}, '', href) // solo refleja el cambio de url pero no refresca la página
+  // crear un evento personalizado para avisar de que ha cambiado la ruta
+  const navigationEvent = new Event(EVENTS.PUSHSTATE)
+  window.dispatchEvent(navigationEvent)
+}
+
+function navigateBack() {
+  window.history.back()
+}
 
 export function HomePage() {
   return (
     <>
       <h1>Home</h1>
       <p>Esta es una página de ejemplo para crear un react router desde cero</p>
-      <a href="/about">Ir a Sobre nosotros</a>
+      <button onClick={() => navigate('/about')}>Ir a Sobre nosotros</button>
     </>
   )
 }
@@ -22,13 +34,27 @@ export function AboutPage() {
         />
       </div>
       <p>Hola, me llamo Víctor y estoy creando un clon de React Router.</p>
-      <a href="/">Ir a la Home</a>
+      <button onClick={() => navigate('/')}>Ir a la Home</button>
+      <button onClick={navigateBack}>Back</button>
     </>
   )
 }
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    const onLocationChange = () => {
+      setCurrentPath(window.location.pathname)
+    }
+    window.addEventListener(EVENTS.PUSHSTATE, onLocationChange)
+    window.addEventListener(EVENTS.POPSTATE, onLocationChange)
+
+    return () => {
+      window.removeEventListener(EVENTS.PUSHSTATE, onLocationChange)
+      window.removeEventListener(EVENTS.POPSTATE, onLocationChange)
+    }
+  }, [])
 
   return (
     <main>
