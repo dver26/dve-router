@@ -1,4 +1,4 @@
-import { EVENTS } from './consts.js'
+import { BUTTONS, EVENTS } from './consts.js'
 
 export function navigate(href) {
   window.history.pushState({}, '', href) // solo refleja el cambio de url pero no refresca la página
@@ -13,7 +13,7 @@ export function navigateBack() {
 
 export default function Link({ target, to, ...props }) {
   const handleClick = (event) => {
-    const isMainEvent = event.button === 0 // primary click
+    const isMainEvent = BUTTONS.primary === 0 // primary click
     const isModifiedEvent =
       event.metaKey || event.altKey || event.ctrlKey || event.shiftKey
     const isManageableEvent = target === undefined || target === '_self'
@@ -25,6 +25,9 @@ export default function Link({ target, to, ...props }) {
 
     navigate(to)
   }
+
+  /* en el componente Link se le da unos children pero nosotros no lo especificamos como children del anchor, este lo renderiza ya que hay una propiedad del objeto props
+     que es el children que le estamos pasando y este se renderiza sabiendo que estamos usando el modelo de self-closed element */
 
   return <a onClick={handleClick} href={to} target={target} {...props} />
 }
