@@ -5,7 +5,7 @@
 - [x] Crear un componente Link para hacerlo más declarativo
 - [x] Crear un componente Router para hacerlo más declarativo
 - [x] Soportar una ruta por defecto (404)
-- [ ] Soportar rutas con parámetros
+- [x] Soportar rutas con parámetros
 - [ ] Componente <Route /> para hacerlo declarativo
 - [ ] Lazy Loading de las rutas
 - [ ] Testing
