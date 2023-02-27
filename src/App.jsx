@@ -2,23 +2,12 @@ import './App.css'
 
 import HomePage from './pages/Home.jsx'
 import AboutPage from './pages/About.jsx'
-import Router from './Router'
-import Page404 from './pages/404'
-import SearchPage from './pages/Search'
+import Router from './Router.jsx'
+import Page404 from './pages/404.jsx'
+import SearchPage from './pages/Search.jsx'
+import Route from './Route.jsx'
 
 const routes = [
-  {
-    path: '/',
-    Component: HomePage
-  },
-  {
-    path: '/about',
-    Component: AboutPage
-  },
-  {
-    path: '/twitch',
-    Component: () => <h1>Twitch</h1>
-  },
   {
     path: '/search/:query',
     Component: SearchPage
@@ -28,7 +17,10 @@ const routes = [
 export default function App() {
   return (
     <main>
-      <Router routes={routes} DefaultComponent={Page404} />
+      <Router routes={routes} DefaultComponent={Page404}>
+        <Route path='/' Component={HomePage} />
+        <Route path='/about' Component={AboutPage} />
+      </Router>
     </main>
   )
 }
